@@ -22,9 +22,6 @@ from datasets.transforms import GroupScale, GroupCenterCrop, Stack, ToTorchForma
 from VidPrism.modules.videomoe import VidPrism, VideoCLIP
 from modules.text_prompt import text_prompt, text_prompt_ensemble
 
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 
@@ -222,8 +219,6 @@ def validate(val_loader, device, model, video_head, config, text_features, test_
     video_head.eval()
     proc_start_time = time.time()
     autocast_ctx = torch.cuda.amp.autocast
-    all_preds = []
-    all_labels = []
     total_correct1, total_correct5, total_count = 0.0, 0.0, 0
 
     with torch.no_grad():
@@ -274,8 +269,6 @@ def validate(val_loader, device, model, video_head, config, text_features, test_
             total_correct1 += correct1
             total_correct5 += correct5
             total_count += bs
-            all_preds.append(pred[0].cpu())
-            all_labels.append(class_id.cpu())
             # ----- logging -----
             if rank == 0 and (i % config.logging.print_freq == 0):
                 local_top1 = 100.0 * correct1 / bs
@@ -301,18 +294,6 @@ def validate(val_loader, device, model, video_head, config, text_features, test_
 
     if rank == 0:
         print(f"Testing Results: Prec@1 {top1_avg:.3f}, Prec@5 {top5_avg:.3f}")
-        all_preds_tensor = torch.cat(all_preds)
-        all_labels_tensor = torch.cat(all_labels)
-        cm = confusion_matrix(all_labels_tensor.numpy(), all_preds_tensor.numpy())
-        fig, ax = plt.subplots(figsize=(10, 8))
-        sns.heatmap(cm, ax=ax, cmap="Blues", annot=False, fmt='d')
-        ax.set_xlabel("Predicted label")
-        ax.set_ylabel("True label")
-        ax.set_title("Confusion Matrix")
-        plt.tight_layout()
-        plt.savefig("confusion_matrix.png")
-        plt.close()
-        print("[INFO] Confusion matrix saved to confusion_matrix.png")
 
     return top1_avg, top5_avg
 
