@@ -27,7 +27,7 @@ from utils.utils import epoch_saving, best_saving, AverageMeter
 from utils.logger import setup_logger
 from utils.Augmentation import get_augmentation
 from utils.solver import _optimizer, _lr_scheduler
-from modules.video_clip_mergev5_mae import VidPrism
+from VidPrism.modules.videomoe_mae import VidPrism
 
 
 # ===== transformers for VideoMAEv2 =====

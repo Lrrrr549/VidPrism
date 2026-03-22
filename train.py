@@ -37,7 +37,7 @@ import datetime
 import shutil
 from contextlib import suppress
 
-from modules.video_clip_mergev5 import VidPrism, VideoCLIP
+from VidPrism.modules.videomoe import VidPrism, VideoCLIP
 from utils.Augmentation import get_augmentation
 from utils.solver import _optimizer, _lr_scheduler, _lr_scheduler_step
 from utils.utils import init_distributed_mode

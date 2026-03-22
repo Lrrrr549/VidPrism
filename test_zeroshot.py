@@ -21,7 +21,7 @@ from datasets.video import Video_dataset
 from datasets.transforms import GroupScale, GroupCenterCrop, Stack, ToTorchFormatTensor, GroupNormalize, GroupOverSample, GroupFullResSample
 # from modules.video_clip_mergev1 import VidPrism, VideoCLIP
 # from modules.video_clip_mergev5 import VidPrism, VideoCLIP
-from modules.video_clip_mergev5_4090 import VidPrism, VideoCLIP
+from VidPrism.modules.videomoe_text import VidPrism, VideoCLIP
 from modules.text_prompt import text_prompt, text_prompt_ensemble
 
 from sklearn.metrics import confusion_matrix
