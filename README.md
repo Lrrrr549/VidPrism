@@ -1,5 +1,5 @@
 ## [CVPR 2026] Official repository for "VidPrism: Heterogeneous Mixture of Experts for Image-to-Video Transfer"
-
+[![arXiv](https://img.shields.io/badge/arXiv-2605.28229-B31B1B?logo=arxiv)](https://arxiv.org/abs/2605.28229)
 ## Overview
 
 ![VidPrism](./assets/overview.png)
